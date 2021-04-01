@@ -17,13 +17,19 @@ export default function App() {
     Keyboard.dismiss();
   };
 
+  const spliceTask = (currentTask) => {
+    setTasks(tasks.filter((task) => task.text != currentTask.text));
+  };
+
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView>
         <Text style={styles.title}>Todo today</Text>
         <View style={styles.tasksSection}>
           {tasks.map((task, i) => (
-            <Task key={i} text={task.text}></Task>
+            <TouchableOpacity onPress={() => spliceTask(task)}>
+              <Task key={i} text={task.text}></Task>
+            </TouchableOpacity>
           ))}
         </View>
         <View style={styles.addTask}>
@@ -63,6 +69,7 @@ const styles = StyleSheet.create({
   addTask: {
     flexDirection: "row",
     justifyContent: "center",
+    marginTop: 50,
   },
   input: {
     height: 40,
